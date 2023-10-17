@@ -1,0 +1,18 @@
+.header--div{
+    background-color: #151515;
+    font-weight: 500;
+    color: #CECECE;
+}
+
+.header-nav-link{
+    padding: 7px;
+    transition: background-color 0.4s ease;
+    border-radius: 10px;
+}
+
+.header-nav-link:hover {
+    background-color: #C1FF11; /* Background color when hovering */
+    color: #000; /* Text color when hovering */
+  }
+
+/* #C1FF11 */
