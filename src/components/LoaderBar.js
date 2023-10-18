@@ -1,12 +1,23 @@
 import React from 'react'
 import BarLoader from 'react-spinners/BarLoader';
+import Layout from './Layout';
+import './LoaderBar.css'
 
-const LoaderBar = () => {
+const LoaderBar = ({loaderColor}) => {
   return (
-    <><center className="m-3">
-    <BarLoader height={4} width={200}/>
-    <p className="page-text" >Loading...</p>
-  </center></>
+  <>
+    <Layout title={"Checking authentication..."}>
+        <div>
+        <div className="loaderbar--div">
+            <center>
+                <BarLoader height={4} width={200} color={loaderColor ? loaderColor : '#C1FF11'} />
+                 <br/>
+                  <h1>Checking authentication...</h1>
+            </center>
+        </div>
+        </div>
+    </Layout>
+</>
   )
 }
 
