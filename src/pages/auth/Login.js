@@ -10,6 +10,7 @@ import { backendApi } from '../../utils/constants';
 import './Auth.css';
 import Header from '../../components/Header';
 import Footer from '../../components/Footer';
+import LoaderBar from '../../components/LoaderBar';
 
 const Login = () => {
   const [showPassword, setShowPassword] = useState(false);
@@ -17,7 +18,7 @@ const Login = () => {
   const [password, setPassword] = useState('');
   const navigate = useNavigate();
   const [auth, setAuth] = useAuth();
-  const [loader, setLoader] = useState(false);
+  const [redirectLoader, setRedirectLoader] = useState(false);
   const togglePasswordVisibility = () => {
     setShowPassword(!showPassword);
   };
@@ -34,7 +35,7 @@ const Login = () => {
       if (loginResponse && loginResponse.data.status === '1') {
         toast.success(loginResponse.data.message);
         setTimeout(() => {
-          setLoader(true);
+          setRedirectLoader(true);
           setAuth({
             ...auth,
             userDetails: loginResponse.data.data.userDetails,
@@ -61,102 +62,90 @@ const Login = () => {
   };
 
   return (
-    <>
-    <Header/>
-    <Layout title={'Login'}>
-      <div className="auth-display">
-        <div>
-          <Toaster />
-          {loader && (
-            <>
-              <div
-                className="d-flex justify-content-center align-items-center"
-                style={{ height: '100vh' }}
-              >
-                <center className="mb-3">
-                  <BarLoader height={4} width={200} />
-                  <p className="page-text">Redirecting...</p>
-                </center>
-              </div>
-            </>
-          )}
-        </div>
-        {!loader && (
-          <>
-            <form className="auth-form" onSubmit={handleLogin}>
-              <div className="mb-3">
-                <h1>Login</h1> kunalshah1@gmail.com
-                <br></br> Kunal@123
-              </div>
-              <div className="mb-3">
-                <label htmlFor="email" className="form-label">
-                  Email
-                </label>
-                <input
-                  type="email"
-                  className="form-control input-field"
-                  id="email"
-                  style={{ width: '300px' }}
-                  placeholder="Enter email"
-                  value={email}
-                  onChange={(e) => {
-                    setEmail(e.target.value);
-                  }}
-                />
-              </div>
-              <div className="mb-3">
-                <label htmlFor="password" className="form-label">
-                  Password
-                </label>
-                <div className="password-input-container">
+    <> <Toaster />  {redirectLoader && (
+      <>
+        
+        <LoaderBar />
+      </>
+    )}
+
+      {!redirectLoader && (
+        <> <Header />
+          <Layout title={'Login'}>
+            <div className="auth-display" >
+              <form className="auth-form" onSubmit={handleLogin}>
+                <div className="mb-3">
+                  <h1>Login</h1> urvish@gmail.com
+                  <br></br> Urvish@123
+                </div>
+                <div className="mb-3">
+                  <label htmlFor="email" className="form-label">
+                    Email
+                  </label>
                   <input
-                    type={showPassword ? 'text' : 'password'}
-                    className="form-control input-field password-input"
-                    id="password"
+                    type="email"
+                    className="form-control input-field"
+                    id="email"
                     style={{ width: '300px' }}
-                    placeholder="Enter password"
-                    value={password}
+                    placeholder="Enter email"
+                    value={email}
                     onChange={(e) => {
-                      setPassword(e.target.value);
+                      setEmail(e.target.value);
                     }}
                   />
-                  <span
-                    className="password-toggle"
-                    onClick={togglePasswordVisibility}
-                  >
-                    {showPassword ? 'Hide' : 'Show'}
-                  </span>
                 </div>
-              </div>
-              {!buttonLoader ? (
-                <>
-                <button
-                type="submit"
-                className="btn btn-dark button-submit"
-                style={{ width: '300px' }}
-              >
-                Login
-              </button>
-                </>
-              ) : (
-                <>
+                <div className="mb-3">
+                  <label htmlFor="password" className="form-label">
+                    Password
+                  </label>
+                  <div className="password-input-container">
+                    <input
+                      type={showPassword ? 'text' : 'password'}
+                      className="form-control input-field password-input"
+                      id="password"
+                      style={{ width: '300px' }}
+                      placeholder="Enter password"
+                      value={password}
+                      onChange={(e) => {
+                        setPassword(e.target.value);
+                      }}
+                    />
+                    <span
+                      className="password-toggle"
+                      onClick={togglePasswordVisibility}
+                    >
+                      {showPassword ? 'Hide' : 'Show'}
+                    </span>
+                  </div>
+                </div>
+                {!buttonLoader ? (
                   <>
-                    <center className="m-3">
-                    <BarLoader height={4} width={200} color='#C1FF11' />
-                    </center>
+                    <button
+                      type="submit"
+                      className="btn btn-dark button-submit"
+                      style={{ width: '300px' }}
+                    >
+                      Login
+                    </button>
                   </>
-                </>
-              )}
-              <NavLink to="/register" className="nav-link mt-3 text-center">
-                Don't have an account?{' '}
-                <span className="text-primary">Register</span>
-              </NavLink>
-            </form>
-          </>
-        )}
-      </div>
-    </Layout>
-    <Footer/>
+                ) : (
+                  <>
+                    <>
+                      <center className="m-3">
+                        <BarLoader height={4} width={200} color='#C1FF11' />
+                      </center>
+                    </>
+                  </>
+                )}
+                <NavLink to="/register" className="nav-link mt-3 text-center">
+                  Don't have an account?
+                  <span className="text-primary"> Register</span>
+                </NavLink>
+              </form>   </div> </Layout>
+          <Footer />
+        </>
+      )}
+
     </>
   );
 };

@@ -11,8 +11,7 @@
 }
 
 .header-nav-link:hover {
-    background-color: #C1FF11; /* Background color when hovering */
-    color: #000; /* Text color when hovering */
+    background-color: #505050; 
   }
 
 /* #C1FF11 */

@@ -62,7 +62,7 @@ const Register = () => {
             <>
               <div>
                 <center className="mb-3">
-                  <BarLoader height={4} width={200} />
+                  <BarLoader height={4} width={200} color='#C1FF11' />
                 </center>
                 <p className="page-text">Redirecting to the Login page</p>
               </div>
@@ -150,7 +150,7 @@ const Register = () => {
               )}
               <NavLink to="/login" className="nav-link mt-3 text-center">
                 Already have an account?
-                <span className="text-primary">Login</span>
+                <span className="text-primary"> Login</span>
               </NavLink>
             </form>
           </>
